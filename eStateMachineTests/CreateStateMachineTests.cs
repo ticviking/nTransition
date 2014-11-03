@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using System.Threading;
 using NUnit.Framework;
 using eStateMachine;
@@ -37,7 +38,17 @@ namespace eStateMachineTests
             {
                 c.When("I");
             });
+        }
 
+        [Test]
+        public void CanListThePossibleStates()
+        {
+            var Machine = new StateMachine<int>((c) =>
+            {
+                c.When(1).To(2).Done();
+            });
+            Machine.States.Count().ShouldBe(2);
+            Machine.States.ShouldBe(new []{1,2});
         }
     }
 }

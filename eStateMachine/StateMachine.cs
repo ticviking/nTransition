@@ -5,7 +5,7 @@ using System.Text;
 
 namespace eStateMachine
 {
-    public class StateMachine<TState>
+    public class StateMachine<TState> where TState: IEquatable<TState>
     {
         public StateMachine(Action<StateMachineConfig<TState>> action)
         {
@@ -16,22 +16,57 @@ namespace eStateMachine
 
         public Boolean Configured { get { return Configuration != null; } }
         private StateMachineConfig<TState> Configuration { get; set; }
+        public IEnumerable<TState> States { get { return Configuration.States; } }
     }
 
-    public class StateMachineConfig<TState>
+    public class StateMachineConfig<TState> where TState:IEquatable<TState>
     {
-        public StateConfig<TState> When(TState i)
+        private IList<StateTransition<TState>> _stateTransitions;
+        private StateTransition<TState> _inProgressTransition;
+
+        public StateMachineConfig()
         {
-            return new StateConfig<TState>
+            _stateTransitions = new List<StateTransition<TState>>();
+        }
+
+        public IEnumerable<TState> States
+        {
+            get
             {
-                When = i
+               return _stateTransitions.Select(s => s.WhenState).Union(_stateTransitions.Select(s => s.ToState)).Distinct();
+            }
+        }
+
+        public StateMachineConfig<TState> When(TState i)
+        {
+            _inProgressTransition = new StateTransition<TState>
+            {
+                WhenState = i
             };
+            return this;
+        }
+
+        public StateMachineConfig<TState> To(TState toState)
+        {
+            _inProgressTransition.To(toState);
+            return this;
+        }
+
+        public void Done()
+        {
+            _stateTransitions.Add(_inProgressTransition);
+            _inProgressTransition = new StateTransition<TState>();
         }
     }
 
-    public struct StateConfig<TState>
+    public struct StateTransition<TState> where TState : IEquatable<TState>
     {
-        public TState When { get; set; }
+        public TState WhenState { get; set; }
+        public TState ToState { get; set; }
 
+        public void To(TState to)
+        {
+            ToState = to;
+        }
     }
 }
