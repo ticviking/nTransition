@@ -13,21 +13,31 @@ namespace eStateMachineTests
         [Test]
         public void Exist()
         {
-            var Machine = new StateMachine((c) =>
+            var Machine = new StateMachine<int>((c) =>
             {
-                
+
             });
         }
 
         [Test]
         public void AcceptsAConfigAction()
         {
-            var Machine = new StateMachine((c) =>
+            var Machine = new StateMachine<int>((c) =>
             {
-                c.When(1);
+                c.When(1); // ToDo: Make this a complete state build
             });
 
             Machine.Configured.ShouldBe(true);
+        }
+
+        [Test]
+        public void CanUseDifferentTypesForStates()
+        {
+            var Machine = new StateMachine<string>(c =>
+            {
+                c.When("I");
+            });
+
         }
     }
 }

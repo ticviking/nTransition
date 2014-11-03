@@ -5,33 +5,33 @@ using System.Text;
 
 namespace eStateMachine
 {
-    public class StateMachine
+    public class StateMachine<TState>
     {
-        public StateMachine(Action<StateMachineConfig> action)
+        public StateMachine(Action<StateMachineConfig<TState>> action)
         {
-            var config = new StateMachineConfig();
+            var config = new StateMachineConfig<TState>();
             action(config);
             Configuration = config;
         }
 
         public Boolean Configured { get { return Configuration != null; } }
-        private StateMachineConfig Configuration { get; set; }
+        private StateMachineConfig<TState> Configuration { get; set; }
     }
 
-    public class StateMachineConfig
+    public class StateMachineConfig<TState>
     {
-        public StateConfig When(int i)
+        public StateConfig<TState> When(TState i)
         {
-            return new StateConfig
+            return new StateConfig<TState>
             {
                 When = i
             };
         }
     }
 
-    public struct StateConfig
+    public struct StateConfig<TState>
     {
-        public int When { get; set; }
+        public TState When { get; set; }
 
     }
 }
