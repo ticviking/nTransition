@@ -27,7 +27,7 @@ Class ThingWithFoo{
  
   public Foo foo {
     get: {return _foo;}
-    set { _foo == FooMachine.Set(_foo, value); }
+    set { _foo = FooMachine.Set(_foo, value); }
   }
 }
 ```
