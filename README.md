@@ -5,7 +5,7 @@ eStateMachine is a simple fluent DSL to express state machines and enforce valid
 
 Current state of development is on `develop`. This doesn't work yet, but contribs are welcome. The goal here is to do one thing, and do it well, and composably.
 
-Useage
+Usage
 ------
 
 ``` C# 
