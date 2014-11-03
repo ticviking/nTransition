@@ -10,7 +10,7 @@ namespace eStateMachineTests
     [TestFixture]
     class UseAStateMachineTests
     {
-        internal class UsesAStateMachine<T> where T :IEquatable<T>
+        internal class UsesAStateMachine<T> where T : IComparable
         {
             private readonly StateMachine<T> Machine;
             private T _state;

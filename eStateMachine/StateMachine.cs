@@ -5,7 +5,7 @@ using System.Text;
 
 namespace eStateMachine
 {
-    public class StateMachine<TState> where TState: IEquatable<TState>
+    public class StateMachine<TState> where TState: IComparable
     {
         public StateMachine(Action<StateMachineConfig<TState>> action)
         {
@@ -24,7 +24,7 @@ namespace eStateMachine
         }
     }
 
-    public class StateMachineConfig<TState> where TState: IEquatable<TState>
+    public class StateMachineConfig<TState> where TState: IComparable 
     {
         private IList<StateTransition<TState>> _stateTransitions;
         private StateTransition<TState> _inProgressTransition;
@@ -64,14 +64,14 @@ namespace eStateMachine
 
         public TState Set(TState current, TState newState)
         {
-            var stateTransitions = _stateTransitions.Where(s => Equals(s.WhenState, current) && Equals(s.ToState, newState));
+            var stateTransitions = _stateTransitions.Where(s => s.WhenState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
             if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State Transition Exists");
 
             return newState;
         }
     }
 
-    public class StateTransition<TState> where TState : IEquatable<TState> 
+    public class StateTransition<TState> where TState : IComparable 
     {
         public TState WhenState { get; set; }
         private bool _hasWhened = false;
