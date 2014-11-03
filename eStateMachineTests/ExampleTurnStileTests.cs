@@ -1,5 +1,7 @@
-﻿using eStateMachine;
+﻿using System;
+using eStateMachine;
 using NUnit.Framework;
+using Shouldly;
 
 namespace eStateMachineTests
 {
@@ -12,13 +14,48 @@ namespace eStateMachineTests
         /// </summary>
         class TurnStile
         {
-            enum TurnstileStates
+            public enum TurnstileState
             {
                 Locked,
                 Unlocked
             }
-            private static readonly StateMachine<TurnstileStates> Machine = new StateMachine<TurnstileStates>(c => { });
+            private static readonly StateMachine<TurnstileState> Machine = new StateMachine<TurnstileState>(c => { });
+            private TurnstileState _status;
+
+            public TurnstileState Status
+            {
+                get { return _status; }
+                set { _status = Machine.Set(_status, value); }
+            }
+
+            public void Push()
+            {
+                if (Status == TurnstileState.Locked) throw new Exception("You Can't Enter a Locked Turnstile");
+            }
         }
-        
+
+
+        private TurnStile theTurnStile;
+
+        [SetUp]
+        public void Setup()
+        {
+            theTurnStile = new TurnStile();
+        }
+
+        [Test]
+        public void TurnStileStartsLocked()
+        {
+            theTurnStile.Status.ShouldBe(TurnStile.TurnstileState.Locked);
+        }
+
+        [Test]
+        public void LockedActions()
+        {
+            Should.Throw<Exception>(() =>
+            {
+                theTurnStile.Push();
+            });
+        }
     }
 }
