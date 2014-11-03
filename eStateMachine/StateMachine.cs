@@ -18,13 +18,13 @@ namespace eStateMachine
         private StateMachineConfig<TState> Configuration { get; set; }
         public IEnumerable<TState> States { get { return Configuration.States; } }
 
-        public TState Set(TState state, TState value)
+        public TState Set(TState current, TState newState)
         {
-            throw new NotImplementedException();
+            return Configuration.Set(current, newState);
         }
     }
 
-    public class StateMachineConfig<TState> where TState:IEquatable<TState>
+    public class StateMachineConfig<TState> where TState: IEquatable<TState>
     {
         private IList<StateTransition<TState>> _stateTransitions;
         private StateTransition<TState> _inProgressTransition;
@@ -62,9 +62,17 @@ namespace eStateMachine
             _stateTransitions.Add(_inProgressTransition);
             _inProgressTransition = new StateTransition<TState>();
         }
+
+        public TState Set(TState current, TState newState)
+        {
+            var stateTransitions = _stateTransitions.Where(s => Equals(s.WhenState, current) && Equals(s.ToState, newState));
+            if (stateTransitions.Count() == 0 ) throw new InvalidTransitionException("No Such State Transition Exists");
+
+            return newState;
+        }
     }
 
-    public struct StateTransition<TState> where TState : IEquatable<TState>
+    public struct StateTransition<TState> where TState : IEquatable<TState> 
     {
         public TState WhenState { get; set; }
         public TState ToState { get; set; }
