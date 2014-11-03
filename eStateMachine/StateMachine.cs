@@ -32,6 +32,7 @@ namespace eStateMachine
         public StateMachineConfig()
         {
             _stateTransitions = new List<StateTransition<TState>>();
+            _inProgressTransition = new StateTransition<TState>();
         }
 
         public IEnumerable<TState> States
@@ -42,12 +43,9 @@ namespace eStateMachine
             }
         }
 
-        public StateMachineConfig<TState> When(TState i)
+        public StateMachineConfig<TState> When(TState whenState)
         {
-            _inProgressTransition = new StateTransition<TState>
-            {
-                WhenState = i
-            };
+            _inProgressTransition.When(whenState);
             return this;
         }
 
@@ -59,27 +57,43 @@ namespace eStateMachine
 
         public void Done()
         {
-            _stateTransitions.Add(_inProgressTransition);
+            var transition = _inProgressTransition.Done();
+            if(transition != null) _stateTransitions.Add(transition);
             _inProgressTransition = new StateTransition<TState>();
         }
 
         public TState Set(TState current, TState newState)
         {
             var stateTransitions = _stateTransitions.Where(s => Equals(s.WhenState, current) && Equals(s.ToState, newState));
-            if (stateTransitions.Count() == 0 ) throw new InvalidTransitionException("No Such State Transition Exists");
+            if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State Transition Exists");
 
             return newState;
         }
     }
 
-    public struct StateTransition<TState> where TState : IEquatable<TState> 
+    public class StateTransition<TState> where TState : IEquatable<TState> 
     {
         public TState WhenState { get; set; }
+        private bool _hasWhened = false;
         public TState ToState { get; set; }
+        private bool _hasToed = false;
 
         public void To(TState to)
         {
             ToState = to;
+            _hasToed = true;
+        }
+
+        public void When(TState whenState)
+        {
+            WhenState = whenState;
+            _hasWhened = true;
+        }
+
+        public StateTransition<TState> Done()
+        {
+            if (!_hasWhened && !_hasToed) return null;
+            return this;
         }
     }
 }
