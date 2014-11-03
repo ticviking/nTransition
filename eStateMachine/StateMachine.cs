@@ -17,6 +17,11 @@ namespace eStateMachine
         public Boolean Configured { get { return Configuration != null; } }
         private StateMachineConfig<TState> Configuration { get; set; }
         public IEnumerable<TState> States { get { return Configuration.States; } }
+
+        public TState Set(TState state, TState value)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class StateMachineConfig<TState> where TState:IEquatable<TState>

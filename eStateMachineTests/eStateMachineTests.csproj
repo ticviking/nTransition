@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="CreateStateMachineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UseAStateMachineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
