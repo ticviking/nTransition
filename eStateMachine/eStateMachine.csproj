@@ -39,7 +39,6 @@
   <ItemGroup>
     <Compile Include="InvalidTransitionException.cs" />
     <Compile Include="StateTransition.cs" />
-    <Compile Include="Transition.cs" />
     <Compile Include="TransitionConfigBuilder.cs" />
     <Compile Include="TransitionConfiguration.cs" />
     <Compile Include="TransitionMachine.cs" />
