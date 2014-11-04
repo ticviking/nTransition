@@ -5,9 +5,9 @@ using System.Text;
 
 namespace eStateMachine
 {
-    public class StateMachine<TState> where TState: IComparable
+    public class TransitionMachine<TState> where TState: IComparable
     {
-        public StateMachine(Action<StateMachineConfig<TState>> action)
+        public TransitionMachine(Action<StateMachineConfig<TState>> action)
         {
             var config = new StateMachineConfig<TState>();
             action(config);
@@ -43,7 +43,7 @@ namespace eStateMachine
             }
         }
 
-        public StateMachineConfig<TState> When(TState whenState)
+        public StateMachineConfig<TState> From(TState whenState)
         {
             _inProgressTransition.When(whenState);
             return this;
