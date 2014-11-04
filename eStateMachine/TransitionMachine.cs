@@ -7,29 +7,34 @@ namespace eStateMachine
 {
     public class TransitionMachine<TState> where TState: IComparable
     {
-        public TransitionMachine(Action<StateMachineConfig<TState>> action)
+        public TransitionMachine(Action<TransitionConfigBuilder<TState>> action)
         {
-            var config = new StateMachineConfig<TState>();
+            var config = new TransitionConfigBuilder<TState>();
             action(config);
             Configuration = config;
         }
 
-        public Boolean Configured { get { return Configuration != null; } }
-        private StateMachineConfig<TState> Configuration { get; set; }
+        private TransitionConfigBuilder<TState> Configuration { get; set; }
         public IEnumerable<TState> States { get { return Configuration.States; } }
 
-        public TState Set(TState current, TState newState)
+        /// <summary>
+        /// Run a transition between the given states
+        /// </summary>
+        /// <param name="fromState">The Start State for this transition</param>
+        /// <param name="toState">The Destination State for this transition</param>
+        /// <returns>The final state after this transition</returns>
+        public TState Between(TState fromState, TState toState)
         {
-            return Configuration.Set(current, newState);
+            return Configuration.Between(fromState, toState);
         }
     }
 
-    public class StateMachineConfig<TState> where TState: IComparable 
+    public class TransitionConfigBuilder<TState> where TState: IComparable 
     {
         private IList<StateTransition<TState>> _stateTransitions;
         private StateTransition<TState> _inProgressTransition;
 
-        public StateMachineConfig()
+        public TransitionConfigBuilder()
         {
             _stateTransitions = new List<StateTransition<TState>>();
             _inProgressTransition = new StateTransition<TState>();
@@ -43,13 +48,13 @@ namespace eStateMachine
             }
         }
 
-        public StateMachineConfig<TState> From(TState whenState)
+        public TransitionConfigBuilder<TState> From(TState whenState)
         {
             _inProgressTransition.When(whenState);
             return this;
         }
 
-        public StateMachineConfig<TState> To(TState toState)
+        public TransitionConfigBuilder<TState> To(TState toState)
         {
             _inProgressTransition.To(toState);
             return this;
@@ -62,7 +67,7 @@ namespace eStateMachine
             _inProgressTransition = new StateTransition<TState>();
         }
 
-        public TState Set(TState current, TState newState)
+        public TState Between(TState current, TState newState)
         {
             var stateTransitions = _stateTransitions.Where(s => s.WhenState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
             if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State Transition Exists");

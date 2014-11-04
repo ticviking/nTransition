@@ -30,7 +30,7 @@ namespace eStateMachineTests
             public TurnstileState Status
             {
                 get { return _status; }
-                private set { _status = Machine.Set(_status, value); }
+                private set { _status = Machine.Between(_status, value); }
             }
 
             public void Push()

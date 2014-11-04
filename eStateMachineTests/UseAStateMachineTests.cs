@@ -29,7 +29,7 @@ namespace eStateMachineTests
             public T State
             {
                 get { return _state; }
-                set { _state = Machine.Set(_state,value); }
+                set { _state = Machine.Between(_state,value); }
             }
         }
 
