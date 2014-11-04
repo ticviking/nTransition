@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using NUnit.Framework;
 using eStateMachine;
@@ -15,6 +16,15 @@ namespace eStateMachineTests
         public void AcceptsAConfigAction()
         {
             var Machine = new TransitionMachine<int>((c) => c.From(1).To(2).Done());
+        }
+
+        [Test]
+        public void AcceptsAlreadyConfiguresTransitions()
+        {
+            var config = new TransitionConfigBuilder<int>();
+            Action<TransitionConfigBuilder<int>> action = c => c.From(1).To(2).Done();
+            action(config);
+            var Machine = new TransitionMachine<int>(config.GetConfiguration());
         }
 
         [Test]
