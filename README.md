@@ -8,10 +8,11 @@ The current version is v0.0.1 the api is definately still evolving, but as soon 
 Defining A Machine
 ---
 
-The StateMachine<type> constructor accepts a function to configure a transition table describing transitions between object of type. This table used internally to build the state machine used to validate transitions. Any `IComparable` can be used for the types.
+`TransitionMachine<TState>` provide a class that can represent any set of transitions. The constructor accepts a function to configure a transition table describing transitions between entities of type `TState`. Any `IComparable` can be used for the `TState`. This table used internally to validate transitions.
+
 
 ``` C# 
-var m = TransitionMachine<int>(
+var trasitionMachine = TransitionMachine<int>(
   (config) => {
     // Defines a valid transition from 1 to 2
     config.From(1).To(2).Done();
@@ -20,8 +21,11 @@ var m = TransitionMachine<int>(
     // Defines a transition from 3 to 1 that logs the reset of the machine to a log function
     config.From(3).To(1).Then( () => LoggingService.Log("The statemachine has been reset")).Done();
   });
+```
 
-// a more formal state machine 
+`StateMachine<TInput, TState>` defines a more formal finite state machine. It is like the transition machine but adds the `On(TInput)` & `On(IEnumerable<TInput>)` methods to define what inputs can trigger that transition. Defining a FSM using this API is the same as calling `On(Input).From(Start).To(End)` for each edge in the FSM.
+
+``` C#
 var fm = StateMachine<char, int>(
   (config) => {
     // The On method defines what input is acceptable
@@ -32,7 +36,7 @@ var fm = StateMachine<char, int>(
   });
 ```
 
-Usage
+Using a Machine
 ------
 
-TODO: Move the 
+TODO: Move the example code out to here.
