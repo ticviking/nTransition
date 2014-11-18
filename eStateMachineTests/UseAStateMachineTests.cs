@@ -12,15 +12,15 @@ namespace eStateMachineTests
     {
         internal class UsesAStateMachine<T> where T : IComparable
         {
-            private readonly StateMachine<T> Machine;
+            private readonly TransitionMachine<T> Machine;
             private T _state;
 
-            public UsesAStateMachine(StateMachine<T> machine)
+            public UsesAStateMachine(TransitionMachine<T> machine)
             {
                 Machine = machine;
             }
 
-            public UsesAStateMachine(StateMachine<T> machine, T initialState)
+            public UsesAStateMachine(TransitionMachine<T> machine, T initialState)
             {
                 Machine = machine;
                 _state = initialState;
@@ -29,14 +29,14 @@ namespace eStateMachineTests
             public T State
             {
                 get { return _state; }
-                set { _state = Machine.Set(_state,value); }
+                set { _state = Machine.Between(_state,value); }
             }
         }
 
         [Test]
         public void EmptyStateMachineThrowsOnAllSets()
         {
-            var TestMachine = new StateMachine<int>(c => c.Done());
+            var TestMachine = new TransitionMachine<int>(c => c.Done());
             var t = new UsesAStateMachine<int>(TestMachine);
             Should.Throw<InvalidTransitionException>(() => t.State = 1);
             // Try the default type. Important since we were adding a Default -> Default transition in the default constructor
@@ -46,11 +46,11 @@ namespace eStateMachineTests
         [Test]
         public void SimpleCircularStateMachineDoesNotThrow()
         {
-            var TestMachine = new StateMachine<int>(c =>
+            var TestMachine = new TransitionMachine<int>(c =>
             {
-                c.When(1).To(2).Done();
-                c.When(2).To(3).Done();
-                c.When(3).To(1).Done();
+                c.From(1).To(2).Done();
+                c.From(2).To(3).Done();
+                c.From(3).To(1).Done();
             });
             var t = new UsesAStateMachine<int>(TestMachine, 1);
             Should.NotThrow(() =>

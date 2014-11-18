@@ -20,17 +20,17 @@ namespace eStateMachineTests
                 Locked,
                 Unlocked
             }
-            private static readonly StateMachine<TurnstileState> Machine = new StateMachine<TurnstileState>(c =>
+            private static readonly TransitionMachine<TurnstileState> Machine = new TransitionMachine<TurnstileState>(c =>
             {
-                c.When(TurnstileState.Locked).To(TurnstileState.Unlocked).Done();
-                c.When(TurnstileState.Unlocked).To(TurnstileState.Locked).Done();
+                c.From(TurnstileState.Locked).To(TurnstileState.Unlocked).Done();
+                c.From(TurnstileState.Unlocked).To(TurnstileState.Locked).Done();
             });
             private TurnstileState _status;
 
             public TurnstileState Status
             {
                 get { return _status; }
-                private set { _status = Machine.Set(_status, value); }
+                private set { _status = Machine.Between(_status, value); }
             }
 
             public void Push()
