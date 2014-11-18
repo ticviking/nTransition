@@ -54,5 +54,15 @@ namespace eStateMachine
         {
             return new TransitionConfiguration<TState>(_stateTransitions);
         }
+
+        public TransitionConfigBuilder<TState> If(Func<bool> predicate)
+        {
+            return this;
+        }
+
+        public TransitionConfigBuilder<TState> Then(Action func)
+        {
+            return this;
+        }
     }
 }
