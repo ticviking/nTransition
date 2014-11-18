@@ -18,7 +18,12 @@ namespace eStateMachine
             Configuration = config;
         }
 
-        private TransitionConfiguration<TState> Configuration { get; set; }
+        protected TransitionMachine()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected TransitionConfiguration<TState> Configuration { get; set; }
         public IEnumerable<TState> States { get { return Configuration.States; } }
 
         /// <summary>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
+﻿using System.Security.Cryptography.X509Certificates;
 using eStateMachine;
 using Moq;
 using NUnit.Framework;
@@ -33,6 +32,18 @@ namespace eStateMachineTests
                     // Defines a transition from 3 to 1 that logs the reset of the machine to a log function
                     config.From(3).To(1).Then( () => LoggingService.Log("The statemachine has been reset")).Done();
                   });
+        }
+
+        [Test]
+        public void ExampleCreateStateMachine()
+        {
+            var fm = new StateMachine<char, int>( (config) => {
+                // The On method defines what input is acceptable
+                config.On('a').From(1).To(2).Done();
+                // On can also accept an Ienumerable of the input type.
+                // State Machines can use both If, and Then clauses to check conditions or fire events when used
+                config.On( new []{'b', 'c'}).From(2).To(3).If( () => UserService.CurrentUser.IsAdmin).Done();
+              });
         }
 
     }
