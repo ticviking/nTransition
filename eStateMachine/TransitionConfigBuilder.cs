@@ -49,5 +49,10 @@ namespace eStateMachine
 
             return newState;
         }
+
+        public TransitionConfiguration<TState> GetConfiguration()
+        {
+            return new TransitionConfiguration<TState>(_stateTransitions);
+        }
     }
 }
