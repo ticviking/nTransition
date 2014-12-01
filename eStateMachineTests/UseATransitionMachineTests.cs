@@ -9,19 +9,19 @@ using Shouldly;
 namespace eStateMachineTests
 {
     [TestFixture]
-    class UseAStateMachineTests
+    class UseATransitionMachineTests
     {
-        internal class UsesAStateMachine<T> where T : IComparable
+        private class User<T> where T : IComparable
         {
             private readonly TransitionMachine<T> Machine;
             private T _state;
 
-            public UsesAStateMachine(TransitionMachine<T> machine)
+            public User(TransitionMachine<T> machine)
             {
                 Machine = machine;
             }
 
-            public UsesAStateMachine(TransitionMachine<T> machine, T initialState)
+            public User(TransitionMachine<T> machine, T initialState)
             {
                 Machine = machine;
                 _state = initialState;
@@ -35,17 +35,17 @@ namespace eStateMachineTests
         }
 
         [Test]
-        public void EmptyStateMachineThrowsOnAllSets()
+        public void EmptyMachineThrowsOnAllSets()
         {
             var TestMachine = new TransitionMachine<int>(new TransitionConfiguration<int>(new List<Transition<int>>()));
-            var t = new UsesAStateMachine<int>(TestMachine);
+            var t = new User<int>(TestMachine);
             Should.Throw<InvalidTransitionException>(() => t.State = 1);
             // Try the default type. Important since we were adding a Default -> Default transition in the default constructor
             Should.Throw<InvalidTransitionException>(() => t.State = 0);
         }
 
         [Test]
-        public void SimpleCircularStateMachineDoesNotThrow()
+        public void SimpleCircularMachineDoesNotThrow()
         {
             var TestMachine = new TransitionMachine<int>(c =>
             {
@@ -53,7 +53,7 @@ namespace eStateMachineTests
                 c.From(2).To(3).Done();
                 c.From(3).To(1).Done();
             });
-            var t = new UsesAStateMachine<int>(TestMachine, 1);
+            var t = new User<int>(TestMachine, 1);
             Should.NotThrow(() =>
             {
                 t.State = 2;

@@ -59,7 +59,8 @@
     <Compile Include="ExampleTurnStileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadMeExamplesTest.cs" />
-    <Compile Include="UseAStateMachineTests.cs" />
+    <Compile Include="TransitionMachineCallbackTests.cs" />
+    <Compile Include="UseATransitionMachineTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
