@@ -18,6 +18,7 @@ namespace eStateMachine
         {
             get
             {
+                // TODO: make this less slow
                 return _stateTransitions.Select(s => s.FromState).Union(_stateTransitions.Select(s => s.ToState)).Distinct();
             }
         }
