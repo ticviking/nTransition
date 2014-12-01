@@ -35,6 +35,7 @@ namespace eStateMachineTests
         }
 
         [Test]
+        [Ignore] // On Hold to finish needed features for eGrad
         public void ExampleCreateStateMachine()
         {
             var fm = new StateMachine<char, int>( (config) => {
