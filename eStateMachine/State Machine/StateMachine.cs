@@ -12,6 +12,7 @@ namespace eStateMachine
 
         public StateMachine(TransitionConfiguration<TState> config) : base(config)
         {
+            throw new NotImplementedException();
         }
     }
 }

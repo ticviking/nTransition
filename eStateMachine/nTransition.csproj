@@ -35,15 +35,16 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InvalidTransitionException.cs" />
-    <Compile Include="StateMachine.cs" />
-    <Compile Include="StateTransition.cs" />
-    <Compile Include="StateTransitionBuilder.cs" />
-    <Compile Include="TransitionConfigBuilder.cs" />
-    <Compile Include="TransitionConfiguration.cs" />
-    <Compile Include="TransitionMachine.cs" />
+    <Compile Include="State Machine\StateMachine.cs" />
+    <Compile Include="State Machine\StateTransitionBuilder.cs" />
+    <Compile Include="Transition Machine\Transition.cs" />
+    <Compile Include="Transition Machine\TransitionConfigBuilder.cs" />
+    <Compile Include="Transition Machine\TransitionConfiguration.cs" />
+    <Compile Include="Transition Machine\TransitionMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

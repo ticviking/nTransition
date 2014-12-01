@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace eStateMachine
 {
@@ -7,10 +6,6 @@ namespace eStateMachine
         where TState : IComparable
         where TInput : IComparable
     {
-        public StateTransitionBuilder()
-        {
-        }
-
         public StateTransitionBuilder<TInput,TState> On(TInput input)
         {
             throw new NotImplementedException();

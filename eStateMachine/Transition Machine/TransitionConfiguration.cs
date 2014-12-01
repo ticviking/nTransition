@@ -6,9 +6,9 @@ namespace eStateMachine
 {
     public class TransitionConfiguration<TState> where TState : IComparable
     {
-        private readonly IList<StateTransition<TState>> _stateTransitions;
+        private readonly IList<Transition<TState>> _stateTransitions;
 
-        public TransitionConfiguration(IList<StateTransition<TState>> stateTransitions)
+        public TransitionConfiguration(IList<Transition<TState>> stateTransitions)
         {
             _stateTransitions = stateTransitions;
         }
@@ -17,13 +17,13 @@ namespace eStateMachine
         {
             get
             {
-                return _stateTransitions.Select(s => s.WhenState).Union(_stateTransitions.Select(s => s.ToState)).Distinct();
+                return _stateTransitions.Select(s => s.FromState).Union(_stateTransitions.Select(s => s.ToState)).Distinct();
             }
         }
 
         public TState Between(TState current, TState newState)
         {
-            var stateTransitions = _stateTransitions.Where(s => s.WhenState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
+            var stateTransitions = _stateTransitions.Where(s => s.FromState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
             if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State Transition Exists");
 
             return newState;
