@@ -11,9 +11,9 @@ namespace eStateMachine
             throw new NotImplementedException();
         }
 
-        public StateTransitionBuilder<TInput, TState> On(char[] input)
+        public StateTransitionBuilder<TInput, TState> On(TInput[] input)
         {
-            foreach (char c in input)
+            foreach (var c in input)
                 On(c);
             return this;
         }

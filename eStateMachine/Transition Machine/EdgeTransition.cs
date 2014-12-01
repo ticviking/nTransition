@@ -4,10 +4,12 @@ using eStateMachine.Interfaces;
 namespace eStateMachine
 {
     /// <summary>
-    /// Concrete implementation of a 
+    /// Concrete implementation of Transitions
+    /// 
+    /// Implements a transition as an edge between two nodes of TState.
     /// </summary>
     /// <typeparam name="TState">Type representing the States being transiutioned between</typeparam>
-    public class Transition<TState> : ITransition<TState> where TState : IComparable 
+    public class EdgeTransition<TState> : Transition<TState> where TState : IComparable 
     {
         public TState FromState { get; private set; }
         private bool _hasAssignedFrom = false;
@@ -37,8 +39,8 @@ namespace eStateMachine
         /// <summary>
         /// Attempt to finalize the transition.
         /// </summary>
-        /// <returns>The Finalized Transition</returns>
-        public Transition<TState> Done()
+        /// <returns>The Finalized EdgeTransition</returns>
+        public EdgeTransition<TState> Done()
         {
             if (!IsValid) throw new InvalidTransitionException("Attempted to finalize an incomplete transition");
             return this;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using eStateMachine.Interfaces;
 
 namespace eStateMachine
 {
@@ -24,7 +25,7 @@ namespace eStateMachine
         public TState Between(TState current, TState newState)
         {
             var stateTransitions = _stateTransitions.Where(s => s.FromState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
-            if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State Transition Exists");
+            if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State EdgeTransition Exists");
 
             return newState;
         }

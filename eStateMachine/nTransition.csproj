@@ -37,11 +37,11 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ITransition.cs" />
+    <Compile Include="Interfaces\Transition.cs" />
     <Compile Include="InvalidTransitionException.cs" />
     <Compile Include="State Machine\StateMachine.cs" />
     <Compile Include="State Machine\StateTransitionBuilder.cs" />
-    <Compile Include="Transition Machine\Transition.cs" />
+    <Compile Include="Transition Machine\EdgeTransition.cs" />
     <Compile Include="Transition Machine\TransitionConfigBuilder.cs" />
     <Compile Include="Transition Machine\TransitionConfiguration.cs" />
     <Compile Include="Transition Machine\TransitionMachine.cs" />

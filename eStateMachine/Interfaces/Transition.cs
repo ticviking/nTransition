@@ -2,7 +2,7 @@
 
 namespace eStateMachine.Interfaces
 {
-    public interface ITransition<TState> where TState : IComparable
+    public interface Transition<TState> where TState : IComparable
     {
         TState FromState { get; }
         TState ToState { get; }
@@ -22,7 +22,7 @@ namespace eStateMachine.Interfaces
         /// <summary>
         /// Attempt to finalize the transition.
         /// </summary>
-        /// <returns>The Finalized Transition</returns>
-        Transition<TState> Done();
+        /// <returns>The Finalized EdgeTransition</returns>
+        EdgeTransition<TState> Done();
     }
 }

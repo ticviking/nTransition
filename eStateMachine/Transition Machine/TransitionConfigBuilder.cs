@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using eStateMachine.Interfaces;
 
 namespace eStateMachine
 {
@@ -12,7 +13,7 @@ namespace eStateMachine
         public TransitionConfigBuilder()
         {
             _stateTransitions = new List<Transition<TState>>();
-            _inProgressTransition = new Transition<TState>();
+            _inProgressTransition = new EdgeTransition<TState>();
         }
 
         public IEnumerable<TState> States
@@ -39,13 +40,13 @@ namespace eStateMachine
         {
             var transition = _inProgressTransition.Done();
             if(transition != null) _stateTransitions.Add(transition);
-            _inProgressTransition = new Transition<TState>();
+            _inProgressTransition = new EdgeTransition<TState>();
         }
 
         public TState Between(TState current, TState newState)
         {
             var stateTransitions = _stateTransitions.Where(s => s.FromState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
-            if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State Transition Exists");
+            if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State EdgeTransition Exists");
 
             return newState;
         }
