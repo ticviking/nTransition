@@ -41,7 +41,7 @@ namespace eStateMachineTests
                 // The On method defines what input is acceptable
                 config.On('a').From(1).To(2).Done();
                 // On can also accept an Ienumerable of the input type.
-                // State Machines can use both If, and Then clauses to check conditions or fire events when used
+                // State Machines can use both If, and Then clauses to check conditions or fire events when on a particular transition 
                 config.On( new []{'b', 'c'}).From(2).To(3).If( () => UserService.CurrentUser.IsAdmin).Done();
               });
         }

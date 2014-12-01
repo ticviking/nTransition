@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
+using eStateMachine.Interfaces;
 using NUnit.Framework;
 using eStateMachine;
 using Shouldly;
@@ -35,7 +37,7 @@ namespace eStateMachineTests
         [Test]
         public void EmptyStateMachineThrowsOnAllSets()
         {
-            var TestMachine = new TransitionMachine<int>(c => c.Done());
+            var TestMachine = new TransitionMachine<int>(new TransitionConfiguration<int>(new List<Transition<int>>()));
             var t = new UsesAStateMachine<int>(TestMachine);
             Should.Throw<InvalidTransitionException>(() => t.State = 1);
             // Try the default type. Important since we were adding a Default -> Default transition in the default constructor

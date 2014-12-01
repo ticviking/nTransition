@@ -1,4 +1,5 @@
 using System;
+using eStateMachine.Interfaces;
 
 namespace eStateMachine
 {
@@ -6,9 +7,13 @@ namespace eStateMachine
         where TState : IComparable
         where TInput : IComparable
     {
+        private StateTransition<TInput, TState> _currentStateTransition;
+        private StateTransition<TInput, TState>[] _stateTansitions;
+
         public StateTransitionBuilder<TInput,TState> On(TInput input)
         {
-            throw new NotImplementedException();
+            _currentStateTransition.On(input);
+            return this;
         }
 
         public StateTransitionBuilder<TInput, TState> On(TInput[] input)
@@ -18,9 +23,5 @@ namespace eStateMachine
             return this;
         }
 
-        private void On(char input)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
