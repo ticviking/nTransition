@@ -35,9 +35,9 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
-    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ITransition.cs" />
     <Compile Include="InvalidTransitionException.cs" />
     <Compile Include="State Machine\StateMachine.cs" />
     <Compile Include="State Machine\StateTransitionBuilder.cs" />

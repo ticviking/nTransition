@@ -1,13 +1,13 @@
 ﻿using System;
+using eStateMachine.Interfaces;
 
 namespace eStateMachine
 {
     /// <summary>
-    /// A valid transition between two states of Type TSTate
-    /// This equivilent to an Edge in a Directed graph 
+    /// Concrete implementation of a 
     /// </summary>
     /// <typeparam name="TState">Type representing the States being transiutioned between</typeparam>
-    public class Transition<TState> where TState : IComparable 
+    public class Transition<TState> : ITransition<TState> where TState : IComparable 
     {
         public TState FromState { get; private set; }
         private bool _hasAssignedFrom = false;
