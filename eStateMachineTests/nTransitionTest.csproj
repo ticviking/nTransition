@@ -69,9 +69,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eStateMachine\eStateMachine.csproj">
+    <ProjectReference Include="..\eStateMachine\nTransition.csproj">
       <Project>{78fe77df-239c-4288-92f3-5a9aa05aa848}</Project>
-      <Name>eStateMachine</Name>
+      <Name>nTransition</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
