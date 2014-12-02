@@ -11,9 +11,9 @@ namespace eStateMachine
     /// <typeparam name="TState">Type representing the States being transiutioned between</typeparam>
     public class EdgeTransition<TState> : Transition<TState> where TState : IComparable 
     {
-        public override TState FromState { get; private set; }
+        public override TState FromState { get; set; }
         private bool _hasAssignedFrom = false;
-        public override TState ToState { get; private set; }
+        public override TState ToState { get; set; }
         private bool _hasAssignedTo = false;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace eStateMachine
         /// Attempt to finalize the transition.
         /// </summary>
         /// <returns>The Finalized EdgeTransition</returns>
-        public override EdgeTransition<TState> Done()
+        public override Transition<TState> Done()
         {
             if (!IsValid) throw new InvalidTransitionException("Attempted to finalize an incomplete transition");
             return this;

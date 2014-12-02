@@ -56,8 +56,9 @@ namespace eStateMachine
             return new TransitionConfiguration<TState>(_stateTransitions);
         }
 
-        public TransitionConfigBuilder<TState> If(Func<bool> predicate)
+        public TransitionConfigBuilder<TState> If(Transition<TState>.IfPredicate predicate)
         {
+            _inProgressTransition.If(predicate);
             return this;
         }
 

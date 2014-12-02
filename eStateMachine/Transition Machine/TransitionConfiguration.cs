@@ -28,6 +28,10 @@ namespace eStateMachine
             var stateTransitions = _stateTransitions.Where(s => s.FromState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
             if (!stateTransitions.Any() ) throw new InvalidTransitionException("No Such State EdgeTransition Exists");
 
+            stateTransitions = stateTransitions.Where((s) => s.PassesConstraints);
+            if(!stateTransitions.Any()) throw new InvalidTransitionException("Edge Constraints are unfufilled");
+            
+
             return newState;
         }
     }

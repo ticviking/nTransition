@@ -1,13 +1,39 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 
 namespace eStateMachine.Interfaces
 {
     public abstract class Transition<TState> where TState : IComparable
     {
-        public delegate bool TestDelagate();
+        /// <summary>
+        /// Holds the callbacks passed to If. 
+        /// </summary>
+        /// <returns></returns>
+        public delegate bool IfPredicate();
 
-        public abstract TState FromState { get; }
-        public abstract TState ToState { get; }
+        private IfPredicate IfPredicates;
+
+        public bool PassesConstraints
+        {
+            get
+            {
+                if (IfPredicates == null) return true;
+                return IfPredicates.GetInvocationList().Select<Delegate, bool>((Delegate a) =>
+                {
+                    bool r = (bool) a.DynamicInvoke();
+                    return r;
+                }).Aggregate((a, b) => a && b);
+            }
+        }
+
+        public abstract TState FromState { get; set; }
+        public abstract TState ToState { get; set; }
+
+        public void If(IfPredicate t)
+        {
+            IfPredicates += t;
+        }
 
         /// <summary>
         /// Set the destination state of the transition
@@ -25,6 +51,6 @@ namespace eStateMachine.Interfaces
         /// Attempt to finalize the transition.
         /// </summary>
         /// <returns>The Finalized EdgeTransition</returns>
-        public abstract EdgeTransition<TState> Done();
+        public abstract Transition<TState> Done();
     }
 }

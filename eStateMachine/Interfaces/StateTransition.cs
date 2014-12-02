@@ -2,8 +2,8 @@
 
 namespace eStateMachine.Interfaces
 {
-    interface StateTransition<TInput, TState> : Transition<TState> where TState : IComparable
+    public abstract class StateTransition<TInput, TState> : EdgeTransition<TState> where TState : IComparable
     {
-        void On(TInput input);
+        public abstract void On(TInput input);
     }
 }
