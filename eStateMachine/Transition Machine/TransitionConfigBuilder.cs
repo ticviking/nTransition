@@ -62,8 +62,9 @@ namespace eStateMachine
             return this;
         }
 
-        public TransitionConfigBuilder<TState> Then(Action func)
+        public TransitionConfigBuilder<TState> Then(Transition<TState>.ThenClause func)
         {
+            _inProgressTransition.Then(func);
             return this;
         }
     }

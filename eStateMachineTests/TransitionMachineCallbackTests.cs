@@ -1,4 +1,8 @@
-﻿using eStateMachine;
+﻿using System;
+using System.Runtime.InteropServices;
+using eStateMachine;
+using eStateMachine.Interfaces;
+using Moq;
 using NUnit.Framework;
 using Shouldly;
 
@@ -7,21 +11,10 @@ namespace eStateMachineTests
     [TestFixture]
     public class TransitionMachineCallbackTests
     {
-        [Test]
-        public void MachinesUseIfTransitions()
-        {
-            var machine = new TransitionMachine<int>(c =>
-            {
-                c.From(1).To(2).If(() => 1>2).Done();
-                c.From(2).To(1).If(()=> 1<2 ).Done();
-            });
 
-            Should.Throw<InvalidTransitionException>(() => machine.Between(1, 2));
-            Should.NotThrow(() => machine.Between(2, 1));
-        }
 
         [Test]
-        public void MultipleIfsAreAllTested()
+        public void IfClauses()
         {
             var machine = new TransitionMachine<int>(c =>
             {
@@ -37,5 +30,16 @@ namespace eStateMachineTests
             Should.NotThrow(() => machine.Between(2, 1));
             
         }
+
+        [Test]
+        public void ThenClauses()
+        {
+            bool called = false;
+            var machine = new TransitionMachine<int>(c => c.From(1).To(2).Then(()=> called = true).Done());
+
+            machine.Between(1, 2);
+            called.ShouldBe(true);
+        }
     }
+
 }

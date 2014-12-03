@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using eStateMachine.Interfaces;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace eStateMachine
 {
@@ -30,7 +31,11 @@ namespace eStateMachine
 
             stateTransitions = stateTransitions.Where((s) => s.PassesConstraints);
             if(!stateTransitions.Any()) throw new InvalidTransitionException("Edge Constraints are unfufilled");
-            
+
+            foreach (var s in stateTransitions)
+            {
+                s.runCallbacks();
+            }
 
             return newState;
         }

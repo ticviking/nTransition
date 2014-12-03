@@ -11,8 +11,10 @@ namespace eStateMachine.Interfaces
         /// </summary>
         /// <returns></returns>
         public delegate bool IfPredicate();
+        public delegate void ThenClause();
 
         private IfPredicate IfPredicates;
+        private ThenClause ThenClauses;
 
         public bool PassesConstraints
         {
@@ -52,5 +54,16 @@ namespace eStateMachine.Interfaces
         /// </summary>
         /// <returns>The Finalized EdgeTransition</returns>
         public abstract Transition<TState> Done();
+
+        public void Then(ThenClause func)
+        {
+            ThenClauses += func;
+        }
+
+        public void runCallbacks()
+        {
+            if (ThenClauses == null) return;
+            ThenClauses();
+        }
     }
 }
