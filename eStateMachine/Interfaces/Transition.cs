@@ -7,21 +7,21 @@ namespace eStateMachine.Interfaces
     public abstract class Transition<TState> where TState : IComparable
     {
         /// <summary>
-        /// Holds the callbacks passed to If. 
+        /// Holds the callbacks passed to When. 
         /// </summary>
         /// <returns></returns>
         public delegate bool IfPredicate();
         public delegate void ThenClause();
 
-        private IfPredicate IfPredicates;
-        private ThenClause ThenClauses;
+        private IfPredicate _constraintPredicates;
+        private ThenClause _Callbacks;
 
         public bool PassesConstraints
         {
             get
             {
-                if (IfPredicates == null) return true;
-                return IfPredicates.GetInvocationList().Select<Delegate, bool>((Delegate a) =>
+                if (_constraintPredicates == null) return true;
+                return _constraintPredicates.GetInvocationList().Select<Delegate, bool>((Delegate a) =>
                 {
                     bool r = (bool) a.DynamicInvoke();
                     return r;
@@ -32,9 +32,9 @@ namespace eStateMachine.Interfaces
         public abstract TState FromState { get; set; }
         public abstract TState ToState { get; set; }
 
-        public void If(IfPredicate t)
+        public void When(IfPredicate t)
         {
-            IfPredicates += t;
+            _constraintPredicates += t;
         }
 
         /// <summary>
@@ -55,15 +55,15 @@ namespace eStateMachine.Interfaces
         /// <returns>The Finalized EdgeTransition</returns>
         public abstract Transition<TState> Done();
 
-        public void Then(ThenClause func)
+        public void Do(ThenClause func)
         {
-            ThenClauses += func;
+            _Callbacks += func;
         }
 
         public void runCallbacks()
         {
-            if (ThenClauses == null) return;
-            ThenClauses();
+            if (_Callbacks == null) return;
+            _Callbacks();
         }
     }
 }

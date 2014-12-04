@@ -28,9 +28,9 @@ namespace eStateMachineTests
                     // Defines a valid transition from 1 to 2
                     config.From(1).To(2).Done();
                     // Defines a transition from 2 to 3 if the current user is admin
-                    config.From(2).To(3).If(()=> UserService.CurrentUser.IsAdmin).Done();
+                    config.From(2).To(3).When(()=> UserService.CurrentUser.IsAdmin).Done();
                     // Defines a transition from 3 to 1 that logs the reset of the machine to a log function
-                    config.From(3).To(1).Then( () => LoggingService.Log("The statemachine has been reset")).Done();
+                    config.From(3).To(1).Do( () => LoggingService.Log("The statemachine has been reset")).Done();
                   });
         }
 
@@ -42,8 +42,8 @@ namespace eStateMachineTests
                 // The On method defines what input is acceptable
                 config.On('a').From(1).To(2).Done();
                 // On can also accept an Ienumerable of the input type.
-                // State Machines can use both If, and Then clauses to check conditions or fire events when on a particular transition 
-                config.On( new []{'b', 'c'}).From(2).To(3).If( () => UserService.CurrentUser.IsAdmin).Done();
+                // State Machines can use both When, and Do clauses to check conditions or fire events when on a particular transition 
+                config.On( new []{'b', 'c'}).From(2).To(3).When( () => UserService.CurrentUser.IsAdmin).Done();
               });
         }
 

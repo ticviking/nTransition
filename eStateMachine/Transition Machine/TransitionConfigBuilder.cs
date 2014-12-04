@@ -56,15 +56,15 @@ namespace eStateMachine
             return new TransitionConfiguration<TState>(_stateTransitions);
         }
 
-        public TransitionConfigBuilder<TState> If(Transition<TState>.IfPredicate predicate)
+        public TransitionConfigBuilder<TState> When(Transition<TState>.IfPredicate predicate)
         {
-            _inProgressTransition.If(predicate);
+            _inProgressTransition.When(predicate);
             return this;
         }
 
-        public TransitionConfigBuilder<TState> Then(Transition<TState>.ThenClause func)
+        public TransitionConfigBuilder<TState> Do(Transition<TState>.ThenClause func)
         {
-            _inProgressTransition.Then(func);
+            _inProgressTransition.Do(func);
             return this;
         }
     }

@@ -19,10 +19,10 @@ namespace eStateMachineTests
             var machine = new TransitionMachine<int>(c =>
             {
                 // Only one of these is true
-                c.From(1).To(2).If(() => 1>2).If(() => 1<2).Done();
-                c.From(2).To(3).If(()=> 1<2).If(()=> 2<1).Done();
+                c.From(1).To(2).When(() => 1>2).When(() => 1<2).Done();
+                c.From(2).To(3).When(()=> 1<2).When(()=> 2<1).Done();
                 // Both of these are true
-                c.From(2).To(1).If(()=> 1<2 ).If(()=> 2<3).Done();
+                c.From(2).To(1).When(()=> 1<2 ).When(()=> 2<3).Done();
             });
 
             Should.Throw<InvalidTransitionException>(() => machine.Between(1, 2));
@@ -35,7 +35,7 @@ namespace eStateMachineTests
         public void ThenClauses()
         {
             bool called = false;
-            var machine = new TransitionMachine<int>(c => c.From(1).To(2).Then(()=> called = true).Done());
+            var machine = new TransitionMachine<int>(c => c.From(1).To(2).Do(()=> called = true).Done());
 
             machine.Between(1, 2);
             called.ShouldBe(true);
