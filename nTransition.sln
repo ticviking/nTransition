@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nTransition", "eStateMachine\nTransition.csproj", "{78FE77DF-239C-4288-92F3-5A9AA05AA848}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nTransition", "nTransition\nTransition.csproj", "{78FE77DF-239C-4288-92F3-5A9AA05AA848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nTransitionTest", "eStateMachineTests\nTransitionTest.csproj", "{B7644B4B-D009-4712-848D-1BB4E977A7A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nTransitionTest", "nTransitionTests\nTransitionTest.csproj", "{B7644B4B-D009-4712-848D-1BB4E977A7A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
