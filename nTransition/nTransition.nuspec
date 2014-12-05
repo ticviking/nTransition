@@ -4,15 +4,15 @@
     <id>$id$</id>
     <version>$version$</version>
     <title>$title$</title>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
+    <authors>Andrew Hamblin</authors>
+    <owners>Andrew Hamblin</owners>
     <licenseUrl>https://raw.githubusercontent.com/ticviking/nTransition/master/LICENCE</licenseUrl>
     <projectUrl>https://github.com/ticviking/nTransition</projectUrl>
     <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <releaseNotes>Initial Release</releaseNotes>
     <copyright>Copyright 2014</copyright>
-    <tags>Tag1 Tag2</tags>
+    <tags>State Machines Validation</tags>
   </metadata>
 </package>
