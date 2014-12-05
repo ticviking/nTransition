@@ -55,7 +55,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="CreatnTransitionTests.cs" />
+    <Compile Include="CreateStateMachineTests.cs" />
     <Compile Include="ExampleTurnStileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadMeExamplesTest.cs" />
