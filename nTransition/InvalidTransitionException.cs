@@ -1,6 +1,6 @@
 using System;
 
-namespace eStateMachine
+namespace nTransition
 {
     public class InvalidTransitionException : Exception
     {

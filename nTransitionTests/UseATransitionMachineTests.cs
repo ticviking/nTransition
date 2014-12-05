@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
-using eStateMachine.Interfaces;
+using nTransition.Interfaces;
 using NUnit.Framework;
-using eStateMachine;
+using nTransition;
 using Shouldly;
 
-namespace eStateMachineTests
+namespace nTransitionTests
 {
     [TestFixture]
     class UseATransitionMachineTests

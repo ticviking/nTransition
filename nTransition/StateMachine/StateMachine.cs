@@ -1,6 +1,6 @@
 using System;
 
-namespace eStateMachine
+namespace nTransition
 {
     public class StateMachine<TInput, TState> : TransitionMachine<TState> where TState : IComparable where TInput : IComparable
     {

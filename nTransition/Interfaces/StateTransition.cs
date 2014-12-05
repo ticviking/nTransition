@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eStateMachine.Interfaces
+namespace nTransition.Interfaces
 {
     public abstract class StateTransition<TInput, TState> : EdgeTransition<TState> where TState : IComparable
     {

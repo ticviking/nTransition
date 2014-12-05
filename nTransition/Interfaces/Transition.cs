@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace eStateMachine.Interfaces
+namespace nTransition.Interfaces
 {
     public abstract class Transition<TState> where TState : IComparable
     {

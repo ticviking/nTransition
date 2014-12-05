@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using eStateMachine.Interfaces;
+using nTransition.Interfaces;
 using Microsoft.VisualBasic.CompilerServices;
 
-namespace eStateMachine
+namespace nTransition
 {
     public class TransitionConfiguration<TState> where TState : IComparable
     {

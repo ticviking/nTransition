@@ -1,9 +1,9 @@
 ﻿using System.Security.Cryptography.X509Certificates;
-using eStateMachine;
+using nTransition;
 using Moq;
 using NUnit.Framework;
 
-namespace eStateMachineTests
+namespace nTransitionTests
 {
     [TestFixture]
     public class ReadMeExamplesTest
@@ -36,7 +36,7 @@ namespace eStateMachineTests
 
         [Test]
         [Ignore] // On Hold to finish needed features for eGrad
-        public void ExampleCreateStateMachine()
+        public void ExampleCreatnTransition()
         {
             var fm = new StateMachine<char, int>( (config) => {
                 // The On method defines what input is acceptable

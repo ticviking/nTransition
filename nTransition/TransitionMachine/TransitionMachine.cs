@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace eStateMachine
+namespace nTransition
 {
     public class TransitionMachine<TState> where TState: IComparable
     {

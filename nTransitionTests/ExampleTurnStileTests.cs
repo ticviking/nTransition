@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Threading.Tasks;
-using eStateMachine;
+using nTransition;
 using NUnit.Framework;
 using Shouldly;
 
-namespace eStateMachineTests
+namespace nTransitionTests
 {
     [TestFixture]
     class ExampleTurnStileTests
     {
         /// <summary>
-        /// This class uses eStateMachine to implement the turnstile example 
+        /// This class uses nTransition to implement the turnstile example 
         /// given at http://en.wikipedia.org/wiki/Finite-state_machine
         /// </summary>
         class TurnStile

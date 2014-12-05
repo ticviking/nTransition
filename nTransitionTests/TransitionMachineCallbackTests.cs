@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using eStateMachine;
-using eStateMachine.Interfaces;
+using nTransition;
+using nTransition.Interfaces;
 using Moq;
 using NUnit.Framework;
 using Shouldly;
 
-namespace eStateMachineTests
+namespace nTransitionTests
 {
     [TestFixture]
     public class TransitionMachineCallbackTests

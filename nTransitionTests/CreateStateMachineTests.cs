@@ -4,10 +4,10 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using NUnit.Framework;
-using eStateMachine;
+using nTransition;
 using Shouldly;
 
-namespace eStateMachineTests
+namespace nTransitionTests
 {
     [TestFixture]
     public class TransitionMachineTests

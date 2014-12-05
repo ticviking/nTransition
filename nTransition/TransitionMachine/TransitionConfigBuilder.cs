@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using eStateMachine.Interfaces;
+using nTransition.Interfaces;
 
-namespace eStateMachine
+namespace nTransition
 {
     public class TransitionConfigBuilder<TState> where TState: IComparable 
     {

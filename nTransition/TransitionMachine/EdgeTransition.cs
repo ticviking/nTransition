@@ -1,7 +1,7 @@
 ﻿using System;
-using eStateMachine.Interfaces;
+using nTransition.Interfaces;
 
-namespace eStateMachine
+namespace nTransition
 {
     /// <summary>
     /// Concrete implementation of Transitions
