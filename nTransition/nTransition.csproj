@@ -40,12 +40,12 @@
     <Compile Include="Interfaces\StateTransition.cs" />
     <Compile Include="Interfaces\Transition.cs" />
     <Compile Include="InvalidTransitionException.cs" />
-    <Compile Include="State Machine\StateMachine.cs" />
-    <Compile Include="State Machine\StateTransitionBuilder.cs" />
-    <Compile Include="Transition Machine\EdgeTransition.cs" />
-    <Compile Include="Transition Machine\TransitionConfigBuilder.cs" />
-    <Compile Include="Transition Machine\TransitionConfiguration.cs" />
-    <Compile Include="Transition Machine\TransitionMachine.cs" />
+    <Compile Include="StateMachine\StateMachine.cs" />
+    <Compile Include="StateMachine\StateTransitionBuilder.cs" />
+    <Compile Include="TransitionMachine\EdgeTransition.cs" />
+    <Compile Include="TransitionMachine\TransitionConfigBuilder.cs" />
+    <Compile Include="TransitionMachine\TransitionConfiguration.cs" />
+    <Compile Include="TransitionMachine\TransitionMachine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
