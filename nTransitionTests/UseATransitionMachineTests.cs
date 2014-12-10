@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using eStateMachine.Interfaces;
 using NUnit.Framework;
@@ -63,6 +64,23 @@ namespace eStateMachineTests
                 t.State = 3;
                 t.State = 1;
             });
+        }
+
+        [Test]
+        public void CanGetPossibleTransitionsFromState()
+        {
+            var TestMachine = new TransitionMachine<int>(c =>
+            {
+                c.From(1).To(2).Done();
+                c.From(1).To(3).Done();
+                c.From(2).To(4).Done();
+                c.From(3).To(4).Done();
+                c.From(4).To(1).Done();
+            });
+            var possibleTransitions = TestMachine.GetTransitionsFromState(1).ToArray();
+            possibleTransitions.Length.ShouldBe(2);
+            possibleTransitions[0].ShouldBe(2);
+            possibleTransitions[1].ShouldBe(3);
         }
     }
 }

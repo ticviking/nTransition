@@ -35,5 +35,10 @@ namespace eStateMachine
         {
             return Configuration.Between(fromState, toState);
         }
+
+        public IEnumerable<TState> GetTransitionsFromState(TState fromState)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
