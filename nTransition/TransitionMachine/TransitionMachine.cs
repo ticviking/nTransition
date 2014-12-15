@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace nTransition
 {
@@ -34,6 +35,24 @@ namespace nTransition
         public TState Between(TState fromState, TState toState)
         {
             return Configuration.Between(fromState, toState);
+        }
+
+
+        /// <summary>
+        /// Get possible states that can be transitioned to
+        /// </summary>
+        /// <param name="fromState">State to ne transitioned from</param>
+        /// <returns>IEnumerable of states that can be transitioned to</returns>
+        public IEnumerable<TState> GetTransitionsFromState(TState fromState)
+        {
+            //I'm not sure how efficient this is
+            foreach (var stateTransition in Configuration.StateTransitions)
+            {
+                if (stateTransition.FromState.Equals(fromState))
+                {
+                    yield return stateTransition.ToState;
+                }
+            } 
         }
     }
 }

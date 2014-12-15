@@ -24,6 +24,11 @@ namespace nTransition
             }
         }
 
+        public IEnumerable<Transition<TState>> StateTransitions
+        {
+            get { return _stateTransitions.Distinct(); }
+        }
+
         public TState Between(TState current, TState newState)
         {
             var stateTransitions = _stateTransitions.Where(s => s.FromState.CompareTo(current) == 0 && s.ToState.CompareTo( newState) == 0 );
