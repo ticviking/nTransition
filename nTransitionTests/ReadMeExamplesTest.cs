@@ -33,20 +33,6 @@ namespace nTransitionTests
                     config.From(3).To(1).Do( () => LoggingService.Log("The statemachine has been reset")).Done();
                   });
         }
-
-        [Test]
-        [Ignore] // On Hold to finish needed features for eGrad
-        public void ExampleCreatnTransition()
-        {
-            var fm = new StateMachine<char, int>( (config) => {
-                // The On method defines what input is acceptable
-                config.On('a').From(1).To(2).Done();
-                // On can also accept an Ienumerable of the input type.
-                // State Machines can use both When, and Do clauses to check conditions or fire events when on a particular transition 
-                config.On( new []{'b', 'c'}).From(2).To(3).When( () => UserService.CurrentUser.IsAdmin).Done();
-              });
-        }
-
     }
 
     public interface ILog

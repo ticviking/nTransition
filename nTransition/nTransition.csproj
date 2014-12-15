@@ -35,13 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="StateMachine\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\StateTransition.cs" />
     <Compile Include="Interfaces\Transition.cs" />
     <Compile Include="InvalidTransitionException.cs" />
-    <Compile Include="StateMachine\StateMachine.cs" />
-    <Compile Include="StateMachine\StateTransitionBuilder.cs" />
     <Compile Include="TransitionMachine\EdgeTransition.cs" />
     <Compile Include="TransitionMachine\TransitionConfigBuilder.cs" />
     <Compile Include="TransitionMachine\TransitionConfiguration.cs" />

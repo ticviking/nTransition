@@ -18,11 +18,6 @@ namespace nTransition
             Configuration = config;
         }
 
-        protected TransitionMachine()
-        {
-            throw new NotImplementedException();
-        }
-
         protected TransitionConfiguration<TState> Configuration { get; set; }
         public IEnumerable<TState> States { get { return Configuration.States; } }
 

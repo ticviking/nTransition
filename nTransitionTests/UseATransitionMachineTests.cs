@@ -30,7 +30,6 @@ namespace nTransitionTests
 
             public T State
             {
-                get { return _state; }
                 set { _state = Machine.Between(_state,value); }
             }
         }
@@ -63,6 +62,18 @@ namespace nTransitionTests
                 t.State = 2;
                 t.State = 3;
                 t.State = 1;
+            });
+        }
+
+        [Test]
+        public void InvalidTransitionCreationsThrow()
+        {
+            var tm = new TransitionMachine<int>(c =>
+            {
+                Should.Throw<InvalidTransitionException>(() =>
+                {
+                    c.To(1).Done();
+                });
             });
         }
 
